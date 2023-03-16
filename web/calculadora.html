@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculadora</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h1>Calculadora</h1>
+  <form>
+    <label for="num1">Número 1:</label>
+    <input type="number" name="num1" id="num1">
+    <br>
+    <label for="num2">Número 2:</label>
+    <input type="number" name="num2" id="num2">
+    <br>
+    <label for="operacion">Operación:</label>
+    <select name="operacion" id="operacion">
+      <option value="suma">Suma</option>
+      <option value="resta">Resta</option>
+      <option value="multiplicacion">Multiplicación</option>
+      <option value="division">División</option>
+    </select>
+    <br>
+    <button type="button" onclick="calcular()">Calcular</button>
+  </form>
+  <div id="respuesta"></div>
+  <script>
+    function calcular() {
+      var num1 = $('#num1').val();
+      var num2 = $('#num2').val();
+      var operacion = $('#operacion').val();
+      $.post('servicio.php', { accion: 'calcular', num1: num1, num2: num2, operacion: operacion }, function(respuesta) {
+        $('#respuesta').html(respuesta);
+      }, 'json');
+    }
+  </script>
+</body>
+</html>
